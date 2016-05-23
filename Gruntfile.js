@@ -4,6 +4,7 @@ module.exports = function (grunt) {
 
 grunt.initConfig({
 
+    nick : 'pure',
     pkg  : grunt.file.readJSON('package.json'),
     bower: grunt.file.readJSON('bower.json'),
 
@@ -72,20 +73,17 @@ grunt.initConfig({
                     'build/grids-units.css'
                 ]},
 
-                {'build/menus-nr.css': [
-                    'build/menus-core.css',
-                    'build/menus.css',
-                    'build/menus-paginator.css'
-                ]},
-
                 {'build/menus.css': [
-                    'build/menus-nr.css',
-                    'build/menus-r.css'
+                    'build/menus-core.css',
+                    'build/menus-horizontal.css',
+                    'build/menus-dropdown.css',
+                    'build/menus-scrollable.css',
+                    'build/menus-skin.css',
                 ]},
 
                 // Rollups
 
-                {'build/<%= pkg.name %>.css': [
+                {'build/<%= nick %>.css': [
                     'build/base.css',
                     'build/grids.css',
                     'build/buttons.css',
@@ -94,12 +92,12 @@ grunt.initConfig({
                     'build/tables.css'
                 ]},
 
-                {'build/<%= pkg.name %>-nr.css': [
+                {'build/<%= nick %>-nr.css': [
                     'build/base.css',
                     'build/grids.css',
                     'build/buttons.css',
                     'build/forms-nr.css',
-                    'build/menus-nr.css',
+                    'build/menus.css',
                     'build/tables.css'
                 ]}
             ]
@@ -140,13 +138,13 @@ grunt.initConfig({
     compress: {
         release: {
             options: {
-                archive: 'release/<%= pkg.version %>/<%= pkg.name %>-<%= pkg.version %>.tar.gz'
+                archive: 'release/<%= pkg.version %>/<%= nick %>-<%= pkg.version %>.tar.gz'
             },
 
             expand : true,
             flatten: true,
             src    : 'build/*',
-            dest   : '<%= pkg.name %>/<%= pkg.version %>/'
+            dest   : '<%= nick %>/<%= pkg.version %>/'
         }
     },
 
@@ -165,7 +163,7 @@ grunt.initConfig({
 
             expand: true,
             cwd   : 'build/',
-            src   : ['base*.css', '<%= pkg.name %>*.css']
+            src   : ['base*.css', '<%= nick %>*.css']
         },
 
         yahoo: {
@@ -173,7 +171,7 @@ grunt.initConfig({
                 banner: [
                     '/*!',
                     'Pure v<%= pkg.version %>',
-                    'Copyright 2014 Yahoo! Inc. All rights reserved.',
+                    'Copyright 2013 Yahoo! Inc. All rights reserved.',
                     'Licensed under the BSD License.',
                     'https://github.com/yahoo/pure/blob/master/LICENSE.md',
                     '*/\n'
